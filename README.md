@@ -33,6 +33,8 @@ Other vehicles in traffic benefit from smoother flow caused by ZüriFlow vehicle
 - **Smoother traffic** — Even non-equipped vehicles benefit from improved flow
 - **Same travel time** — No increase in journey duration
 
+*Note: Results from simulation under ideal conditions (no pedestrians, no cross-traffic, perfect V2I communication, consistent signal timing). Real-world results may vary.*
+
 ## Requirements
 
 - SUMO 1.26.0+ (Simulation of Urban Mobility)
