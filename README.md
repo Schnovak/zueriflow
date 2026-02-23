@@ -8,13 +8,30 @@ Vehicles receive speed recommendations to pass through traffic lights on green, 
 
 ## Results
 
-| Metric | Baseline | ZüriFlow | Improvement |
-|--------|----------|----------|-------------|
-| Full stops | - | - | -% |
-| Fuel consumption | - | - | -% |
-| CO2 emissions | - | - | -% |
+### ZüriFlow-equipped vehicles
 
-*Run `py -3.13 compare_scenarios.py` to generate current metrics.*
+| Metric | Baseline | With GLOSA | Improvement |
+|--------|----------|------------|-------------|
+| Full stops | 128 | 30 | **-77%** |
+| Time stopped | 22 min | 10 min | **-55%** |
+| CO2 emissions | 11.6 kg | 8.5 kg | **-27%** |
+| Fuel consumption | 5.0 L | 3.7 L | **-27%** |
+
+### Bonus: Normal vehicles also benefit
+
+Other vehicles in traffic benefit from smoother flow caused by ZüriFlow vehicles:
+
+| Metric | Without ZüriFlow | With ZüriFlow | Improvement |
+|--------|------------------|---------------|-------------|
+| Full stops | 211 | 63 | **-70%** |
+| CO2 emissions | 24.4 kg | 19.6 kg | **-20%** |
+
+### Key Benefits
+
+- **Fewer stops** — Vehicles glide through green lights instead of waiting at red
+- **Lower emissions** — Less braking and accelerating means less fuel burned
+- **Smoother traffic** — Even non-equipped vehicles benefit from improved flow
+- **Same travel time** — No increase in journey duration
 
 ## Requirements
 
