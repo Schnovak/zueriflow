@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+
+    <!--
+    Vehicle Types
+    =============
+    normal:    Standard vehicles controlled entirely by SUMO
+    zueriflow: Vehicles with green wave speed advisory (controlled via TraCI)
+    -->
+
+    <vType id="normal"
+           accel="2.6"
+           decel="4.5"
+           length="5.0"
+           maxSpeed="13.89"
+           sigma="0.0"
+           tau="1.2"
+           minGap="2.0"
+           color="0.4,0.4,0.45"/>
+
+    <vType id="zueriflow"
+           accel="2.6"
+           decel="4.5"
+           length="5.0"
+           maxSpeed="14.0"
+           sigma="0.0"
+           tau="1.2"
+           minGap="2.0"
+           color="0,0.8,1"/>
+
+    <!-- Route through the corridor (1.2 km total) -->
+    <route id="corridor" edges="entry seg1 seg2 seg3 exit"/>
+
+    <!--
+    Traffic Flows
+    =============
+    ~600 vehicles/hour total (moderate urban arterial)
+    30% ZüriFlow adoption rate
+    -->
+    <flow id="flow_normal"
+          type="normal"
+          route="corridor"
+          begin="0"
+          end="900"
+          vehsPerHour="420"
+          departSpeed="max"
+          departPos="base"/>
+
+    <flow id="flow_zueriflow"
+          type="zueriflow"
+          route="corridor"
+          begin="0"
+          end="900"
+          vehsPerHour="180"
+          departSpeed="max"
+          departPos="base"/>
+
+</routes>

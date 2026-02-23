@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Realistic Urban Arterial Corridor
+=================================
+- 4 signalized intersections, 300m apart (typical urban spacing)
+- 60-second signal cycle (realistic)
+- Coordinated for 50 km/h green wave
+- Total corridor length: ~1.2 km
+-->
+
+<net version="1.20" junctionCornerDetail="5" limitTurnSpeed="5.50" avoidOverlap="0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/net_file.xsd">
+
+    <location netOffset="0.00,0.00" convBoundary="-100.00,50.00,1100.00,50.00" origBoundary="-10000000000.00,-10000000000.00,10000000000.00,10000000000.00" projParameter="!"/>
+
+    <!-- Internal junction edges -->
+    <edge id=":light1_0" function="internal">
+        <lane id=":light1_0_0" index="0" speed="13.89" length="0.10" shape="0.00,48.40 0.00,48.40"/>
+    </edge>
+    <edge id=":light2_0" function="internal">
+        <lane id=":light2_0_0" index="0" speed="13.89" length="0.10" shape="300.00,48.40 300.00,48.40"/>
+    </edge>
+    <edge id=":light3_0" function="internal">
+        <lane id=":light3_0_0" index="0" speed="13.89" length="0.10" shape="600.00,48.40 600.00,48.40"/>
+    </edge>
+    <edge id=":light4_0" function="internal">
+        <lane id=":light4_0_0" index="0" speed="13.89" length="0.10" shape="900.00,48.40 900.00,48.40"/>
+    </edge>
+
+    <!-- Road segments (300m between intersections) -->
+    <edge id="entry" from="start" to="light1" priority="2">
+        <lane id="entry_0" index="0" speed="13.89" length="100.00" shape="-100.00,48.40 0.00,48.40"/>
+    </edge>
+    <edge id="seg1" from="light1" to="light2" priority="2">
+        <lane id="seg1_0" index="0" speed="13.89" length="300.00" shape="0.00,48.40 300.00,48.40"/>
+    </edge>
+    <edge id="seg2" from="light2" to="light3" priority="2">
+        <lane id="seg2_0" index="0" speed="13.89" length="300.00" shape="300.00,48.40 600.00,48.40"/>
+    </edge>
+    <edge id="seg3" from="light3" to="light4" priority="2">
+        <lane id="seg3_0" index="0" speed="13.89" length="300.00" shape="600.00,48.40 900.00,48.40"/>
+    </edge>
+    <edge id="exit" from="light4" to="end" priority="2">
+        <lane id="exit_0" index="0" speed="13.89" length="200.00" shape="900.00,48.40 1100.00,48.40"/>
+    </edge>
+
+    <!--
+    Traffic Light Timing
+    ====================
+    60-second cycle (realistic urban timing)
+    - Green: 25s (main street)
+    - Yellow: 4s
+    - Red: 31s (cross street green + clearance)
+
+    Offsets are INTENTIONALLY imperfect to simulate real-world conditions
+    where signals are not perfectly coordinated. This creates opportunities
+    for GLOSA to help vehicles avoid stopping.
+    -->
+    <tlLogic id="light1" type="static" programID="0" offset="0">
+        <phase duration="25" state="G"/>
+        <phase duration="4"  state="y"/>
+        <phase duration="31" state="r"/>
+    </tlLogic>
+    <tlLogic id="light2" type="static" programID="0" offset="35">
+        <phase duration="25" state="G"/>
+        <phase duration="4"  state="y"/>
+        <phase duration="31" state="r"/>
+    </tlLogic>
+    <tlLogic id="light3" type="static" programID="0" offset="15">
+        <phase duration="25" state="G"/>
+        <phase duration="4"  state="y"/>
+        <phase duration="31" state="r"/>
+    </tlLogic>
+    <tlLogic id="light4" type="static" programID="0" offset="50">
+        <phase duration="25" state="G"/>
+        <phase duration="4"  state="y"/>
+        <phase duration="31" state="r"/>
+    </tlLogic>
+
+    <!-- Junctions -->
+    <junction id="start" type="dead_end" x="-100.00" y="50.00" incLanes="" intLanes="" shape="-100.00,50.00 -100.00,46.80"/>
+    <junction id="light1" type="traffic_light" x="0.00" y="50.00" incLanes="entry_0" intLanes=":light1_0_0" shape="0.00,50.00 0.00,46.80 0.00,50.00">
+        <request index="0" response="0" foes="0" cont="0"/>
+    </junction>
+    <junction id="light2" type="traffic_light" x="300.00" y="50.00" incLanes="seg1_0" intLanes=":light2_0_0" shape="300.00,50.00 300.00,46.80 300.00,50.00">
+        <request index="0" response="0" foes="0" cont="0"/>
+    </junction>
+    <junction id="light3" type="traffic_light" x="600.00" y="50.00" incLanes="seg2_0" intLanes=":light3_0_0" shape="600.00,50.00 600.00,46.80 600.00,50.00">
+        <request index="0" response="0" foes="0" cont="0"/>
+    </junction>
+    <junction id="light4" type="traffic_light" x="900.00" y="50.00" incLanes="seg3_0" intLanes=":light4_0_0" shape="900.00,50.00 900.00,46.80 900.00,50.00">
+        <request index="0" response="0" foes="0" cont="0"/>
+    </junction>
+    <junction id="end" type="dead_end" x="1100.00" y="50.00" incLanes="exit_0" intLanes="" shape="1100.00,46.80 1100.00,50.00"/>
+
+    <!-- Connections -->
+    <connection from="entry" to="seg1" fromLane="0" toLane="0" via=":light1_0_0" tl="light1" linkIndex="0" dir="s" state="O"/>
+    <connection from="seg1" to="seg2" fromLane="0" toLane="0" via=":light2_0_0" tl="light2" linkIndex="0" dir="s" state="O"/>
+    <connection from="seg2" to="seg3" fromLane="0" toLane="0" via=":light3_0_0" tl="light3" linkIndex="0" dir="s" state="O"/>
+    <connection from="seg3" to="exit" fromLane="0" toLane="0" via=":light4_0_0" tl="light4" linkIndex="0" dir="s" state="O"/>
+
+    <connection from=":light1_0" to="seg1" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":light2_0" to="seg2" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":light3_0" to="seg3" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":light4_0" to="exit" fromLane="0" toLane="0" dir="s" state="M"/>
+
+</net>
