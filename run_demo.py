@@ -107,8 +107,8 @@ def run_demo(with_controller: bool):
         "--seed", "42",
         "--start", "true",
         "--delay", "30",
-        "--window-size", "1280,720",
-        "--window-pos", "100,100",
+        "--window-size", "1920,1080",
+        "--window-pos", "0,0",
         "--gui-settings-file", view_file,
     ]
 
