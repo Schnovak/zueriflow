@@ -90,7 +90,16 @@ py -3.13 compare_scenarios.py
 
 ## References
 
-- [Green Light Optimal Speed Advisory (GLOSA) - ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S0001457524000794)
+**Research Papers:**
+- [Examining road safety impacts of GLOSA - ScienceDirect (2024)](https://www.sciencedirect.com/science/article/abs/pii/S0001457524000794)
+- [GLOSA achieves fuel savings by impacting driving behavior - ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S0959652623027920)
+- [Real scenario and simulations on GLOSA for reduced CO2 - ResearchGate](https://www.researchgate.net/publication/277895336_Real_scenario_and_simulations_on_GLOSA_traffic_light_system_for_reduced_CO2_emissions_waiting_time_and_travel_time)
+- [Green Light Optimized Speed Advisory Systems - ResearchGate](https://www.researchgate.net/publication/275855428_Green_Light_Optimized_Speed_Advisory_Systems)
+
+**Real-World Deployments:**
+- [US DOT: GLOSA reduces travel time 5%, stop time 13%](https://www.itskrs.its.dot.gov/2025-b01942)
+- [Interreg Europe: GLOSA Good Practice (Birmingham UK trial)](https://www.interregeurope.eu/good-practices/glosa-green-light-optimal-speed-advisory)
+- [Field Testing GLOSA for Buses - MDPI](https://www.mdpi.com/1996-1073/15/4/1491)
 
 ## Contact
 
