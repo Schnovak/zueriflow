@@ -202,9 +202,9 @@ def run_demo(with_controller: bool):
                 traci.gui.setZoom("View #0", 600)
                 key_cooldown = 5
 
-        # If tracked vehicle left, pick nearest one
+        # If tracked vehicle left, pick the newest one (furthest back, lowest x)
         if tracking_vehicle not in zf_list and zf_list:
-            tracking_index = min(tracking_index, len(zf_list) - 1)
+            tracking_index = 0  # First in sorted list = lowest x = newest vehicle
             tracking_vehicle = zf_list[tracking_index]
             traci.gui.trackVehicle("View #0", tracking_vehicle)
             traci.gui.setZoom("View #0", 600)
