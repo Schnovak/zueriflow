@@ -47,6 +47,17 @@ Other vehicles in traffic benefit from smoother flow:
 
 *Note: Simulation under ideal conditions (no pedestrians, no cross-traffic, perfect V2I communication). Real-world results may vary.*
 
+### Fuel & CO2 Calculation
+
+Uses a physics-based model:
+
+1. **Base consumption**: 6 L/100km at steady speed
+2. **Stop penalty**: Kinetic energy lost at each full stop (½ × mass × velocity²)
+3. **Extra fuel**: Energy needed to accelerate again (engine efficiency 25%, gasoline 34.2 MJ/L)
+4. **CO2**: 2.31 kg per liter of fuel burned
+
+Key insight: Only full stops waste significant energy. Gradual speed changes (coasting) are efficient.
+
 ## How It Works
 
 1. Detects traffic lights up to 350m ahead
