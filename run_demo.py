@@ -202,10 +202,22 @@ def run_demo(with_controller: bool):
                 traci.gui.setZoom("View #0", 600)
                 key_cooldown = 5
 
-        # If tracked vehicle left, pick the front one (highest x, leading the pack)
+        # If tracked vehicle left, pick the front one that's not too far along
+        # Best viewing: between first and second light (x < 600m)
         if tracking_vehicle not in zf_list and zf_list:
-            tracking_index = len(zf_list) - 1  # Last in sorted list = highest x = front vehicle
-            tracking_vehicle = zf_list[tracking_index]
+            # Find front vehicle that's still in early part of corridor
+            best_vid = None
+            best_x = -1
+            for vid in zf_list:
+                x = traci.vehicle.getPosition(vid)[0]
+                if x < 600 and x > best_x:  # Not past second light
+                    best_x = x
+                    best_vid = vid
+            # Fallback to any front vehicle if none in range
+            if best_vid is None:
+                best_vid = zf_list[-1]
+            tracking_vehicle = best_vid
+            tracking_index = zf_list.index(tracking_vehicle)
             traci.gui.trackVehicle("View #0", tracking_vehicle)
             traci.gui.setZoom("View #0", 600)
 
