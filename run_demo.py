@@ -13,6 +13,7 @@ To record: Press Win+G and click Record, or use OBS
 import traci
 import sys
 import os
+import time
 
 try:
     import keyboard  # pip install keyboard
@@ -142,7 +143,10 @@ def run_demo(with_controller: bool):
     tracking_index = 0
     key_cooldown = 0  # Prevent multiple triggers
 
+    step_duration = 0.05  # Fixed 50ms per step for consistent speed
+
     while traci.simulation.getMinExpectedNumber() > 0:
+        step_start = time.time()
         traci.simulationStep()
         t = traci.simulation.getTime()
 
@@ -220,6 +224,11 @@ def run_demo(with_controller: bool):
             tracking_index = zf_list.index(tracking_vehicle)
             traci.gui.trackVehicle("View #0", tracking_vehicle)
             traci.gui.setZoom("View #0", 600)
+
+        # Ensure consistent simulation speed in both modes
+        elapsed = time.time() - step_start
+        if elapsed < step_duration:
+            time.sleep(step_duration - elapsed)
 
     traci.close()
     print(f"  Total stops: {stops}")
