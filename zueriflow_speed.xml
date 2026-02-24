@@ -1,7 +1,7 @@
 <viewsettings>
     <scheme name="ZueriFlow Demo">
         <opengl dither="0" fps="0" trueZ="0" drawBoundaries="0" disableDottedContours="0" forceDrawRectangleSelection="0" geometryIndices_show="0" geometryIndices_size="50.00" geometryIndices_color="255,0,128" geometryIndices_bgColor="128,0,0,0" geometryIndices_constantSize="1" geometryIndices_onlySelected="0"/>
-        <background backgroundColor="180,210,150" showGrid="0" gridXSize="100.00" gridYSize="100.00"/>
+        <background backgroundColor="60,95,45" showGrid="0" gridXSize="100.00" gridYSize="100.00"/>
         <edges laneEdgeMode="0" scaleMode="0" laneShowBorders="0" showBikeMarkings="1" showLinkDecals="1" realisticLinkRules="0" showLinkRules="1" showRails="0" secondaryShape="0" hideConnectors="0" widthExaggeration="1.00" minSize="0.00" showDirection="0" showSublanes="1" spreadSuperposed="0" disableHideByZoom="1" edgeParam="EDGE_KEY" laneParam="LANE_KEY" edgeData="speed" edgeDataID="" edgeDataScaling="" edgeValueHideCheck="0" edgeValueHideThreshold="0.00" edgeValueHideCheck2="0" edgeValueHideThreshold2="200.00" edgeValueSetNeutral="0" edgeValueNeutralThreshold="0.00" edgeValueFixRange="0" edgeValueRainbowScheme="1"
                 edgeName_show="0" edgeName_size="60.00" edgeName_color="orange" edgeName_bgColor="128,0,0,0" edgeName_constantSize="1" edgeName_onlySelected="0"
                 internalEdgeName_show="0" internalEdgeName_size="45.00" internalEdgeName_color="128,64,0" internalEdgeName_bgColor="128,0,0,0" internalEdgeName_constantSize="1" internalEdgeName_onlySelected="0"
@@ -528,7 +528,7 @@
                   vehicleName_show="0" vehicleName_size="60.00" vehicleName_color="204,153,0" vehicleName_bgColor="128,0,0,0" vehicleName_constantSize="1" vehicleName_onlySelected="0"
                   vehicleValue_show="0" vehicleValue_size="80.00" vehicleValue_color="cyan" vehicleValue_bgColor="128,0,0,0" vehicleValue_constantSize="1" vehicleValue_onlySelected="0"
                   vehicleScaleValue_show="0" vehicleScaleValue_size="80.00" vehicleScaleValue_color="grey" vehicleScaleValue_bgColor="128,0,0,0" vehicleScaleValue_constantSize="1" vehicleScaleValue_onlySelected="0"
-                  vehicleText_show="1" vehicleText_size="80.00" vehicleText_color="21,21,21" vehicleText_bgColor="128,0,0,0" vehicleText_constantSize="1" vehicleText_onlySelected="0">
+                  vehicleText_show="1" vehicleText_size="80.00" vehicleText_color="255,255,255" vehicleText_bgColor="128,0,0,0" vehicleText_constantSize="1" vehicleText_onlySelected="0">
             <colorScheme name="given vehicle/type/route color">
                 <entry color="yellow"/>
             </colorScheme>
