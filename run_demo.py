@@ -13,7 +13,13 @@ To record: Press Win+G and click Record, or use OBS
 import traci
 import sys
 import os
-import msvcrt  # Windows keyboard input
+
+try:
+    import keyboard  # pip install keyboard
+except ImportError:
+    print("Installing keyboard library...")
+    os.system(f"{sys.executable} -m pip install keyboard")
+    import keyboard
 
 class GreenWaveController:
     def __init__(self):
@@ -134,6 +140,7 @@ def run_demo(with_controller: bool):
     traci.gui.setZoom("View #0", 1500)
     tracking_vehicle = None
     tracking_index = 0
+    key_cooldown = 0  # Prevent multiple triggers
 
     while traci.simulation.getMinExpectedNumber() > 0:
         traci.simulationStep()
@@ -178,21 +185,22 @@ def run_demo(with_controller: bool):
         zf_vehicles.sort()
         zf_list = [vid for _, vid in zf_vehicles]
 
-        # Check for arrow key input (non-blocking)
-        if msvcrt.kbhit():
-            key = msvcrt.getch()
-            if key == b'\xe0':  # Arrow key prefix
-                arrow = msvcrt.getch()
-                if arrow == b'K' and zf_list:  # Left arrow
-                    tracking_index = (tracking_index - 1) % len(zf_list)
-                    tracking_vehicle = zf_list[tracking_index]
-                    traci.gui.trackVehicle("View #0", tracking_vehicle)
-                    traci.gui.setZoom("View #0", 600)
-                elif arrow == b'M' and zf_list:  # Right arrow
-                    tracking_index = (tracking_index + 1) % len(zf_list)
-                    tracking_vehicle = zf_list[tracking_index]
-                    traci.gui.trackVehicle("View #0", tracking_vehicle)
-                    traci.gui.setZoom("View #0", 600)
+        # Check for arrow key input (global hotkeys, works even when SUMO has focus)
+        if key_cooldown > 0:
+            key_cooldown -= 1
+        elif zf_list:
+            if keyboard.is_pressed('left'):
+                tracking_index = (tracking_index - 1) % len(zf_list)
+                tracking_vehicle = zf_list[tracking_index]
+                traci.gui.trackVehicle("View #0", tracking_vehicle)
+                traci.gui.setZoom("View #0", 600)
+                key_cooldown = 5  # Wait 5 steps before next input
+            elif keyboard.is_pressed('right'):
+                tracking_index = (tracking_index + 1) % len(zf_list)
+                tracking_vehicle = zf_list[tracking_index]
+                traci.gui.trackVehicle("View #0", tracking_vehicle)
+                traci.gui.setZoom("View #0", 600)
+                key_cooldown = 5
 
         # If tracked vehicle left, pick nearest one
         if tracking_vehicle not in zf_list and zf_list:
