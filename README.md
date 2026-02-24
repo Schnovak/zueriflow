@@ -45,7 +45,7 @@ novak@kalaj.org
 
 ---
 
-© 2025 Novak Kalaj. All rights reserved.
+© 2025 Novak Tomic. All rights reserved.
 
 ## Requirements
 
