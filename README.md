@@ -4,9 +4,11 @@ GLOSA (Green Light Optimal Speed Advisory) traffic simulation for Zürich.
 
 Vehicles receive speed recommendations to pass through traffic lights on green, reducing stops and emissions.
 
+## Videos
+
 [![Project Explanation](https://img.youtube.com/vi/dTFsEfYSqCg/0.jpg)](https://youtu.be/dTFsEfYSqCg)
 
-**[Watch the demo video](https://youtu.be/EHPM1QoO9jc)**
+[![Demo Video](https://img.youtube.com/vi/EHPM1QoO9jc/0.jpg)](https://youtu.be/EHPM1QoO9jc)
 
 ## Results
 
