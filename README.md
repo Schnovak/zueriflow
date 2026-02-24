@@ -35,6 +35,10 @@ Other vehicles in traffic benefit from smoother flow caused by ZüriFlow vehicle
 
 *Note: Results from simulation under ideal conditions (no pedestrians, no cross-traffic, perfect V2I communication, consistent signal timing). Real-world results may vary.*
 
+## Contact
+
+novak@kalaj.org
+
 ## Requirements
 
 - SUMO 1.26.0+ (Simulation of Urban Mobility)
