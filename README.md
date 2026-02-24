@@ -8,11 +8,11 @@ Vehicles receive speed recommendations to pass through traffic lights on green, 
 
 **SUMO Simulation Demo:**
 
-[![SUMO Simulation Demo](https://img.youtube.com/vi/EHPM1QoO9jc/0.jpg)](https://youtu.be/EHPM1QoO9jc)
+[![SUMO Simulation Demo](https://img.youtube.com/vi/dTFsEfYSqCg/0.jpg)](https://youtu.be/dTFsEfYSqCg)
 
 **Project Explanation:**
 
-[![Project Explanation](https://img.youtube.com/vi/dTFsEfYSqCg/0.jpg)](https://youtu.be/dTFsEfYSqCg)
+[![Project Explanation](https://img.youtube.com/vi/EHPM1QoO9jc/0.jpg)](https://youtu.be/EHPM1QoO9jc)
 
 ## Presentation
 
