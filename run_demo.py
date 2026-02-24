@@ -166,13 +166,8 @@ def run_demo(with_controller: bool):
                 else:
                     traci.vehicle.setColor(veh_id, (80, 80, 90, 255))  # Gray
             else:
-                # Baseline mode - highlight tracked ZüriFlow vehicle
-                if veh_id == tracking_vehicle:
-                    traci.vehicle.setColor(veh_id, (0, 220, 255, 255))  # Cyan = tracked
-                elif vtype == "zueriflow":
-                    traci.vehicle.setColor(veh_id, (100, 100, 110, 255))  # Light gray
-                else:
-                    traci.vehicle.setColor(veh_id, (80, 80, 90, 255))  # Gray
+                # Baseline mode - all cars same color
+                traci.vehicle.setColor(veh_id, (80, 80, 90, 255))
 
             # Count stops
             is_moving = speed > 0.5
