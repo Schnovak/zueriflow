@@ -43,6 +43,10 @@ Other vehicles in traffic benefit from smoother flow caused by ZüriFlow vehicle
 
 novak@kalaj.org
 
+---
+
+© 2025 Novak Kalaj. All rights reserved.
+
 ## Requirements
 
 - SUMO 1.26.0+ (Simulation of Urban Mobility)
