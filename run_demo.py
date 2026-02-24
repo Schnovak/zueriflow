@@ -13,6 +13,7 @@ To record: Press Win+G and click Record, or use OBS
 import traci
 import sys
 import os
+import msvcrt  # Windows keyboard input
 
 class GreenWaveController:
     def __init__(self):
@@ -124,6 +125,7 @@ def run_demo(with_controller: bool):
     else:
         print("  BASELINE DEMO - Watch vehicles STOP at red lights")
     print()
+    print("  LEFT/RIGHT arrows: switch between ZüriFlow vehicles")
     print("  Press Win+G to open Game Bar and record")
     print("  Close the SUMO window when done")
     print()
@@ -131,6 +133,7 @@ def run_demo(with_controller: bool):
     # Set up camera view (uses ZueriFlow Demo scheme from demo_view.xml)
     traci.gui.setZoom("View #0", 1500)
     tracking_vehicle = None
+    tracking_index = 0
 
     while traci.simulation.getMinExpectedNumber() > 0:
         traci.simulationStep()
@@ -166,21 +169,37 @@ def run_demo(with_controller: bool):
                 stops += 1
             prev_moving[veh_id] = is_moving
 
-        # Track one ZüriFlow vehicle until it leaves, then pick the newest one
-        if tracking_vehicle not in traci.vehicle.getIDList():
-            # Find the newest ZüriFlow vehicle (lowest x position)
-            tracking_vehicle = None
-            best_pos = float('inf')
-            for vid in traci.vehicle.getIDList():
-                if traci.vehicle.getTypeID(vid) == "zueriflow":
-                    pos = traci.vehicle.getPosition(vid)[0]
-                    if pos < best_pos:
-                        best_pos = pos
-                        tracking_vehicle = vid
+        # Get sorted list of ZüriFlow vehicles (by x position)
+        zf_vehicles = []
+        for vid in traci.vehicle.getIDList():
+            if traci.vehicle.getTypeID(vid) == "zueriflow":
+                pos = traci.vehicle.getPosition(vid)[0]
+                zf_vehicles.append((pos, vid))
+        zf_vehicles.sort()
+        zf_list = [vid for _, vid in zf_vehicles]
 
-            if tracking_vehicle:
-                traci.gui.trackVehicle("View #0", tracking_vehicle)
-                traci.gui.setZoom("View #0", 600)
+        # Check for arrow key input (non-blocking)
+        if msvcrt.kbhit():
+            key = msvcrt.getch()
+            if key == b'\xe0':  # Arrow key prefix
+                arrow = msvcrt.getch()
+                if arrow == b'K' and zf_list:  # Left arrow
+                    tracking_index = (tracking_index - 1) % len(zf_list)
+                    tracking_vehicle = zf_list[tracking_index]
+                    traci.gui.trackVehicle("View #0", tracking_vehicle)
+                    traci.gui.setZoom("View #0", 600)
+                elif arrow == b'M' and zf_list:  # Right arrow
+                    tracking_index = (tracking_index + 1) % len(zf_list)
+                    tracking_vehicle = zf_list[tracking_index]
+                    traci.gui.trackVehicle("View #0", tracking_vehicle)
+                    traci.gui.setZoom("View #0", 600)
+
+        # If tracked vehicle left, pick nearest one
+        if tracking_vehicle not in zf_list and zf_list:
+            tracking_index = min(tracking_index, len(zf_list) - 1)
+            tracking_vehicle = zf_list[tracking_index]
+            traci.gui.trackVehicle("View #0", tracking_vehicle)
+            traci.gui.setZoom("View #0", 600)
 
     traci.close()
     print(f"  Total stops: {stops}")
